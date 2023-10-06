@@ -19,7 +19,8 @@ import UserProfileInfo from '../components/UserProfileInfo'
 import UserProfilePosts from '@/components/UserProfilePosts.vue';
 import UserProfileWrite from '@/components/UserProfileWrite.vue';
 import { reactive } from 'vue';
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
+import $ from 'jquery';
 
 export default {
   name: 'UserProfile',
@@ -30,12 +31,12 @@ export default {
     UserProfileWrite,
   },
   setup() {
-    const route = useRoute();
-    console.log(route.params.userId)
+    // const route = useRoute();
+    // console.log(route.params.userId)
 
 
     // reative 用于对象
-    const user = reactive({
+    let user = reactive({
       id: 1,
       userName: "axr",
       lastName: "An",
@@ -44,7 +45,7 @@ export default {
       is_followed: true,
     });
 
-    const posts = reactive({
+    let posts = reactive({
       counts: 3,
       posts: [
         {
@@ -65,6 +66,18 @@ export default {
       ]
     })
 
+    $.ajax({
+      url:"http://127.0.0.1:3000/lxt/index/",
+      type:"get",
+      success(resp) {
+        // console.log(resp)
+        user.firstName = resp.firstName;
+        user.lastName = resp.lastName;
+        user.followerCount = resp.followerCount;
+        user.is_followed = (resp.is_followed == 'true')
+      }
+    })
+
 
     const follow =()=> {
       if (user.is_followed) {
@@ -83,14 +96,15 @@ export default {
     }
 
     const post_a_post = (content) => {
-      console.log(content);
-      posts.count++;
+      // console.log(content);
+      posts.counts++;
       //  unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
       posts.posts.unshift({
-        id:posts.count,
+        id:posts.counts,
         userId:1,
         content:content,
       })
+      // console.log(posts);
     }
 
     return {

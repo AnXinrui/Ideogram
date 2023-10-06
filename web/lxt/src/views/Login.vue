@@ -1,6 +1,6 @@
 <template>
   <Content>
-    <div class="row justify-content-md-center">
+    <!-- <div class="row justify-content-md-center">
       <div class="col-3">
         <form @submit.prevent="login">
           <div class="mb-3">
@@ -17,7 +17,7 @@
         </form>
       </div>
 
-    </div>
+    </div> -->
 
   </Content>
 </template>
@@ -40,27 +40,27 @@ export default {
     let error_message = ref('');
     // const store = useStore();
 
-    const login = ()=> {
-      error_message.value="";
-      store.dispatch("login", {
-        username: username.value,
-        password: password.value,
-        success() {
-          console.log("success");
-          router.push({name:'userlist'});
-        },
-        error() {
-          console.log("failed");
-          error_message.value="用户名或密码错误";
-        }
-      });
-    };
+    // const login = ()=> {
+    //   error_message.value="";
+    //   store.dispatch("login", {
+    //     username: username.value,
+    //     password: password.value,
+    //     success() {
+    //       console.log("success");
+    //       router.push({name:'userlist'});
+    //     },
+    //     error() {
+    //       console.log("failed");
+    //       error_message.value="用户名或密码错误";
+    //     }
+    //   });
+    // };
 
     return {
       username,
       password,
       error_message,
-      login
+      // login
     }
   }
 
@@ -75,4 +75,4 @@ button {
 .error-message {
   color: red;
 }
-</style>
+</style> -->
