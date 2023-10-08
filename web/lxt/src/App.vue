@@ -21,6 +21,10 @@ export default {
 
 
 <style>
-
+body{
+  background-image: url('https://pic.imgdb.cn/item/65211f16c458853aef4f9342.jpg');
+  
+  background-size: cover;
+}
 </style>
 

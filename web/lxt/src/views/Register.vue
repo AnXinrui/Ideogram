@@ -1,19 +1,93 @@
 <template>
-    <Content>register</Content>
-  </template>
+  <Content>
+    <div class="row justify-content-md-center">
+
+      <div class="col-3">
+        <form @submit.prevent="register">
+          <div class="mb-3">
+            <label for="username" class="form-label">用户名</label>
+            <input v-model="username" type="text" class="form-control" id="username" placeholder="请输入用户名">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">密码</label>
+            <input v-model="password" type="password" class="form-control" id="password" placeholder="请输入密码">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">确认密码</label>
+            <input v-model="confirmedpassword" type="password" class="form-control" id="confirmedpassword"
+              placeholder="请再次输入密码">
+          </div>
+          <div class="error_message">{{ error_message }}</div>
+          <button type="submit" class="btn btn-primary">submit</button>
+        </form>
+      </div>
+
+    </div>
+  </Content>
+</template>
   
-  <script>
-  // @ is an alias to /src
-  import Content from '../components/Content'
-  
-  export default {
-    name: 'RegisterView',
-    components: {
-      Content
+<script>
+// @ is an alias to /src
+import Content from '../components/Content'
+import { ref } from 'vue';
+
+import router from '@/router';
+import $ from 'jquery';
+
+export default {
+  name: 'RegisterView',
+  components: {
+    Content
+  },
+  setup() {
+
+    let username = ref('');
+    let password = ref('');
+    let confirmedpassword = ref('');
+    let error_message = ref('');
+
+    const register = () => {
+            $.ajax({
+                url:"http://127.0.0.1:3000/user/account/register/",
+                type:"post",
+                data: {
+                  username: username.value,
+                  password: password.value,
+                  confirmedPassword: confirmedpassword.value, 
+                },
+                
+                success(resp) {
+                    if (resp.error_message === "success") {
+                        router.push({name:"login"});
+                    }
+                    else {
+                        error_message.value = resp.error_message;
+                    }
+                },
+                error(resp) {
+                    console.log(resp);
+                    
+                } 
+            });
+        }
+
+
+    return {
+      username,
+      password,
+      confirmedpassword,
+      error_message,
+      register,
     }
   }
-  </script>
+}
+</script>
   
-  <style scoped>
-  
-  </style>
+<style scoped>
+button{
+    width: 100%;
+}
+.error_message{
+    color: red;
+}
+</style>

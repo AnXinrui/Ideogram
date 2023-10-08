@@ -5,38 +5,65 @@ import UserProfile from '@/views/UserProfile.vue'
 import LoginView from '@/views/Login.vue'
 import NotFound from '@/views/NotFound.vue'
 import RegisterView from '@/views/Register.vue'
-
+import MyProfile from '@/views/user/MyProfile.vue'
+import store from '@/store/index'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    meta: {
+      requestAuth: true
+    }
   },
   {
     path: '/userlist/',
     name: 'userlist',
-    component: UserList 
+    component: UserList,
+    meta: {
+      requestAuth: true
+    }
   },
   {
     path: '/userprofile/:userId/',
     name: 'userprofile',
-    component: UserProfile
+    component: UserProfile,
+    meta: {
+      requestAuth: true
+    }
+  },
+  {
+    path: '/myprofile/',
+    name: 'myprofile',
+    component: MyProfile,
+    meta: {
+      requestAuth: true
+    }
   },
   {
     path: '/login/',
     name: 'login',
-    component: LoginView
+    component: LoginView,
+    meta: {
+      requestAuth: false,
+    }
   },
   {
     path: '/register/',
     name: 'register',
-    component: RegisterView
+    component: RegisterView,
+    meta: {
+      requestAuth: false
+    }
   },
   {
     path: '/404/',
     name: 'notfound',
-    component: NotFound
+    component: NotFound,
+    meta: {
+      requestAuth: false
+    }
   },
   {
     path: '/:catchAll(.*)',
@@ -47,6 +74,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+
+router.beforeEach((to, from, next) => {
+  // console.log(store.state.user.is_login)
+  if (to.meta.requestAuth && !store.state.user.is_login) {
+    next({name: "login"});
+  }
+  else {
+    next();
+  }
 })
 
 export default router

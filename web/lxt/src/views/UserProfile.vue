@@ -78,6 +78,8 @@ export default {
       }
     })
 
+    
+
 
     const follow =()=> {
       if (user.is_followed) {
@@ -117,5 +119,6 @@ export default {
   }
 }
 </script>
+
   
 <style scoped></style>
