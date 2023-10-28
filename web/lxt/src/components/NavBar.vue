@@ -25,7 +25,7 @@
               {{ $store.state.user.username  }}
             </a>
             <ul class="dropdown-menu">
-              <router-link class="dropdown-item" :to="{ name: 'myprofile', params: {} }">我的打卡</router-link>
+              <router-link class="dropdown-item" :to="{ name: 'userattendance', params: {} }">我的打卡</router-link>
               <!-- <li><a class="dropdown-item" href="#">我的动态</a></li> -->
               <li><a class="dropdown-item" href="#">其他</a></li>
               <li>

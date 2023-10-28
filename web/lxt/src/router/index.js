@@ -6,6 +6,7 @@ import LoginView from '@/views/Login.vue'
 import NotFound from '@/views/NotFound.vue'
 import RegisterView from '@/views/Register.vue'
 import MyProfile from '@/views/user/MyProfile.vue'
+import UserAttendance from '@/views/user/AttendanceView.vue'
 import store from '@/store/index'
 
 const routes = [
@@ -37,6 +38,14 @@ const routes = [
     path: '/myprofile/',
     name: 'myprofile',
     component: MyProfile,
+    meta: {
+      requestAuth: true
+    }
+  },
+  {
+    path: '/user/attendance/',
+    name: 'userattendance',
+    component: UserAttendance,
     meta: {
       requestAuth: true
     }

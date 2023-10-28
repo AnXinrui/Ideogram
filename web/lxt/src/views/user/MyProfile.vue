@@ -5,8 +5,8 @@
   <script>
   // @ is an alias to /src
   import Content from '@/components/Content'
-  import $ from 'jquery'
-  import {useStore} from 'vuex'
+//   import $ from 'jquery'
+//   import {useStore} from 'vuex'
   
   export default {
     name: 'MyProfile',
@@ -14,7 +14,7 @@
       Content
     },
     setup() {
-        const store = useStore();
+        // const store = useStore();
         // $.ajax({
         //     url: 'http://127.0.0.1:3000/user/attendance/add/',
         //     type: 'POST',
@@ -33,23 +33,42 @@
         //         console.log(resp);
         //     }
         // })
-        $.ajax({
-            url: 'http://127.0.0.1:3000/user/attendance/remove/',
-            type: 'POST',
-            data: {
-                attendance_id: 2,
-            },
-            headers: {
-                'Authorization': "Bearer " + store.state.user.token,
-            },
-            success(resp) {
-                console.log(resp);
-            },  
-            error(resp){
-                console.log(resp);
-            }
-        })
-  
+        // $.ajax({
+        //     url: 'http://127.0.0.1:3000/user/attendance/remove/',
+        //     type: 'POST',
+        //     data: {
+        //         attendance_id: 2,
+        //     },
+        //     headers: {
+        //         'Authorization': "Bearer " + store.state.user.token,
+        //     },
+        //     success(resp) {
+        //         console.log(resp);
+        //     },  
+        //     error(resp){
+        //         console.log(resp);
+        //     }
+        // })
+        // $.ajax({
+        //     url: 'http://127.0.0.1:3000/user/attendance/update/',
+        //     type: 'POST',
+        //     data: {
+        //         attendance_id: 1,
+        //         title: 'test111',
+        //         description: 'test des11',
+        //         content: 'test content',
+        //     },
+        //     headers: {
+        //         'Authorization': "Bearer " + store.state.user.token,
+        //     },
+        //     success(resp) {
+        //         console.log(resp);
+        //     },  
+        //     error(resp){
+        //         console.log(resp);
+        //     }
+        // })
+        
     }
   
   }
